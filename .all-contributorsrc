@@ -1,0 +1,157 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Gabrola",
+      "name": "Youssef Gaber",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1728215?v=4",
+      "profile": "http://gabro.la",
+      "contributions": [
+        "code",
+        "ideas",
+        "test"
+      ]
+    },
+    {
+      "login": "netiperher",
+      "name": "Per Hermansson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45091747?v=4",
+      "profile": "https://github.com/netiperher",
+      "contributions": [
+        "doc",
+        "code"
+      ]
+    },
+    {
+      "login": "ghoullier",
+      "name": "Grégory Houllier",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2315749?v=4",
+      "profile": "https://ghoullier.deno.dev/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "michaelangrivera",
+      "name": "Michael Angelo ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55844504?v=4",
+      "profile": "http://michaelangrivera.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "cyrus-za",
+      "name": "Pieter Venter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1845861?v=4",
+      "profile": "https://pieter.venter.pro",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "rifaldhiaw",
+      "name": "Rifaldhi AW",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7936061?v=4",
+      "profile": "http://rifaldhiaw.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Jwcode-uk",
+      "name": "Jonathan White ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30149596?v=4",
+      "profile": "https://github.com/Jwcode-uk",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "gingermusketeer",
+      "name": "Max Brosnahan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1177034?v=4",
+      "profile": "https://github.com/gingermusketeer",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "oliverbutler",
+      "name": "Oliver Butler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47489826?v=4",
+      "profile": "https://oliverbutler.uk",
+      "contributions": [
+        "code",
+        "ideas",
+        "doc",
+        "infra",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "baryla",
+      "name": "Adrian Barylski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10336085?v=4",
+      "profile": "https://github.com/baryla",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
+      "login": "neildobson-au",
+      "name": "Neil A. Dobson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6670753?v=4",
+      "profile": "https://nad.dev",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dohaicuong",
+      "name": "Eric Do",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20808725?v=4",
+      "profile": "https://github.com/dohaicuong",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "fruchtzwerg",
+      "name": "Ben",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15377955?v=4",
+      "profile": "https://github.com/fruchtzwerg",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
+      "login": "llllvvuu",
+      "name": "LW",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5601392?v=4",
+      "profile": "https://llllvvuu.dev",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "ts-rest",
+  "projectOwner": "ts-rest",
+  "commitType": "docs"
+}

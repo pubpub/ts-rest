@@ -1,0 +1,13 @@
+{
+  "name": "@ts-rest/fastify",
+  "version": "3.30.5",
+  "peerDependencies": {
+    "fastify": "^4.0.0",
+    "zod": "^3.22.3"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    }
+  }
+}
