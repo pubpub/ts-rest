@@ -1,7 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
 /tmp
 /out-tsc
 
@@ -45,7 +44,6 @@ Thumbs.db
 # Expo
 node_modules/
 .expo/
-dist/
 npm-debug.*
 *.jks
 *.p8
@@ -57,7 +55,7 @@ web-build/
 
 
 # example apps upload directory
-uploads/ 
+uploads/
 .env
 
 .nx/cache
