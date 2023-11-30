@@ -1,5 +1,42 @@
 # ts-rest
 
+Small fork of `@ts-rest/core` for use in the [PubPub SDK](https://github.com/pubpub/sdk).
+
+Mainly exports a few types and allows forms to be uploaded in Node 18.
+
+## Development
+
+```sh
+git clone https://github.com/pubpub/ts-rest
+
+pnpm i
+
+```
+
+Then make the modifications you want to make in `/libs/ts-rest/core`.
+
+When you're done, just run
+
+```sh
+pnpm publish-fork
+```
+
+This will publish `@ts-rest/core` as a tag of this repo, saying something like
+
+```sh
+✔ success Package uploaded to https://github.com/pubpub/ts-rest with the name ts-rest-core-v<something>-gitpkg.
+```
+
+and you can then use it in your project like so:
+
+```sh
+npm i pubpub/ts-rest#ts-rest-core-v<something>-gitpkg
+```
+
+Original README below:
+
+---
+
 <p align="center">
  <img src="https://avatars.githubusercontent.com/u/109956939?s=400&u=8bf67b1281da46d64eab85f48255cd1892bf0885&v=4" height="150"></img>
 </p>

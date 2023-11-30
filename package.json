@@ -14,7 +14,8 @@
     "ci:nx-affected": "yarn ts-node ./tools/workflows/nx-affected.ts",
     "postinstall": "pnpm prisma generate",
     "build-test-all": "nx run-many --targets=lint,test,build",
-    "nx": "nx"
+    "nx": "nx",
+    "publish-fork": "nx build libs/ts-rest/core && cd dist/libs/ts-rest/core && gitpkg publish"
   },
   "engines": {
     "pnpm": "8",
