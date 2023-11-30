@@ -88,7 +88,7 @@ type RecursivelyProcessAppRouter<
     : T[K];
 };
 
-type RecursivelyApplyOptions<
+export type RecursivelyApplyOptions<
   TRouter extends AppRouter,
   TOptions extends RouterOptions
 > = {

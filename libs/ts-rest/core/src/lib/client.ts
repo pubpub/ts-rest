@@ -11,7 +11,7 @@ import {
   Frameworks,
 } from './infer-types';
 
-type RecursiveProxyObj<T extends AppRouter, TClientArgs extends ClientArgs> = {
+export type RecursiveProxyObj<T extends AppRouter, TClientArgs extends ClientArgs> = {
   [TKey in keyof T]: T[TKey] extends AppRoute
     ? AppRouteFunction<T[TKey], TClientArgs>
     : T[TKey] extends AppRouter
