@@ -11,7 +11,10 @@ import {
   Frameworks,
 } from './infer-types';
 
-export type RecursiveProxyObj<T extends AppRouter, TClientArgs extends ClientArgs> = {
+export type RecursiveProxyObj<
+  T extends AppRouter,
+  TClientArgs extends ClientArgs,
+> = {
   [TKey in keyof T]: T[TKey] extends AppRoute
     ? AppRouteFunction<T[TKey], TClientArgs>
     : T[TKey] extends AppRouter
@@ -37,7 +40,7 @@ export function getRouteResponses<T extends AppRouter>(router: T) {
 export type AppRouteFunction<
   TRoute extends AppRoute,
   TClientArgs extends ClientArgs,
-  TArgs = PartialClientInferRequest<TRoute, TClientArgs>
+  TArgs = PartialClientInferRequest<TRoute, TClientArgs>,
 > = AreAllPropertiesOptional<TArgs> extends true
   ? (args?: Prettify<TArgs>) => Promise<Prettify<ClientInferResponses<TRoute>>>
   : (args: Prettify<TArgs>) => Promise<Prettify<ClientInferResponses<TRoute>>>;
@@ -148,10 +151,31 @@ const createFormData = (body: unknown) => {
   const formData = new FormData();
 
   Object.entries(body as Record<string, unknown>).forEach(([key, value]) => {
-    if (value instanceof Blob) {
-      formData.append(key, value);
-    } else {
+    if (Array.isArray(value)) {
+      const [blob, filename] = value;
+      if (!(blob instanceof Blob)) {
+        throw new Error(
+          'Expected a Blob in the first position of the array, instead got ' +
+            blob,
+        );
+      }
+
+      if (typeof filename !== 'string') {
+        throw new Error(
+          'Expected a string in the second position of the array, instead got ' +
+            filename,
+        );
+      }
+
+      formData.set(key, blob, filename);
+    } // this check needs to be first, otherwise you are never able to send any
+    // non-Blob FormData in node 18!
+    // new File([]) instanceof Blob is always true, so this does not change the current behavior
+    else if (!(value instanceof Blob)) {
       formData.append(key, JSON.stringify(value));
+    } // if (instanceof File) // <-- you can do this if you do not want to allow sole Blob uploads at all
+    else {
+      formData.append(key, value);
     }
   });
 
@@ -160,7 +184,7 @@ const createFormData = (body: unknown) => {
 
 const normalizeHeaders = (headers: Record<string, string | undefined>) => {
   return Object.fromEntries(
-    Object.entries(headers).map(([k, v]) => [k.toLowerCase(), v])
+    Object.entries(headers).map(([k, v]) => [k.toLowerCase(), v]),
   );
 };
 
@@ -252,7 +276,7 @@ export const getCompleteUrl = (
   baseUrl: string,
   params: unknown,
   route: AppRoute,
-  jsonQuery: boolean
+  jsonQuery: boolean,
 ) => {
   const path = insertParamsIntoPath({
     path: route.path,
@@ -264,16 +288,16 @@ export const getCompleteUrl = (
 
 export const getRouteQuery = <
   TAppRoute extends AppRoute,
-  Framework extends Frameworks = 'none'
+  Framework extends Frameworks = 'none',
 >(
   route: TAppRoute,
-  clientArgs: InitClientArgs
+  clientArgs: InitClientArgs,
 ) => {
   const knownResponseStatuses = Object.keys(route.responses);
   return async (
     inputArgs?: Framework extends 'nextjs'
       ? ClientInferRequest<AppRouteMutation, ClientArgs, 'nextjs'>
-      : ClientInferRequest<AppRouteMutation, ClientArgs>
+      : ClientInferRequest<AppRouteMutation, ClientArgs>,
   ) => {
     const {
       query,
@@ -293,7 +317,7 @@ export const getRouteQuery = <
       clientArgs.baseUrl,
       params,
       route,
-      !!clientArgs.jsonQuery
+      !!clientArgs.jsonQuery,
     );
 
     const response = await fetchApi({
@@ -324,7 +348,7 @@ export const getRouteQuery = <
 
 export type InitClientReturn<
   T extends AppRouter,
-  TClientArgs extends ClientArgs
+  TClientArgs extends ClientArgs,
 > = RecursiveProxyObj<T, TClientArgs>;
 
 export type InitClientArgs = ClientArgs & {
@@ -337,10 +361,10 @@ export type InitClientArgs = ClientArgs & {
 
 export const initClient = <
   T extends AppRouter,
-  TClientArgs extends InitClientArgs
+  TClientArgs extends InitClientArgs,
 >(
   router: T,
-  args: TClientArgs
+  args: TClientArgs,
 ): InitClientReturn<T, TClientArgs> => {
   return Object.fromEntries(
     Object.entries(router).map(([key, subRouter]) => {
@@ -349,6 +373,6 @@ export const initClient = <
       } else {
         return [key, initClient(subRouter, args)];
       }
-    })
+    }),
   );
 };
