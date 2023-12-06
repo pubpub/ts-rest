@@ -147,36 +147,46 @@ export const tsRestFetchApi: ApiFetcher = async ({
   };
 };
 
+const appendToForm = (formData: FormData, key: string, value: unknown) => {
+  if (Array.isArray(value)) {
+    value.forEach((v) => {
+      appendToForm(formData, key, v);
+    });
+  }
+
+  if (
+    typeof value === 'object' &&
+    value != null &&
+    'blob' in value &&
+    'filename' in value
+  ) {
+    if (!(value.blob instanceof Blob)) {
+      throw new Error('value.blob is not a Blob, instead got ' + value.blob);
+    }
+
+    if (typeof value.filename !== 'string') {
+      throw new Error(
+        'value.filename is not a string, instead got ' + value.filename,
+      );
+    }
+
+    formData.append(key, value.blob, value.filename);
+  }
+  // non-Blob FormData in node 18!
+  // new File([]) instanceof Blob is always true, so this does not change the current behavior
+  else if (!(value instanceof Blob)) {
+    formData.append(key, JSON.stringify(value));
+  } // if (instanceof File) // <-- you can do this if you do not want to allow sole Blob uploads at all
+  else {
+    formData.append(key, value);
+  }
+};
+
 const createFormData = (body: unknown) => {
   const formData = new FormData();
 
   Object.entries(body as Record<string, unknown>).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      const [blob, filename] = value;
-      if (!(blob instanceof Blob)) {
-        throw new Error(
-          'Expected a Blob in the first position of the array, instead got ' +
-            blob,
-        );
-      }
-
-      if (typeof filename !== 'string') {
-        throw new Error(
-          'Expected a string in the second position of the array, instead got ' +
-            filename,
-        );
-      }
-
-      formData.set(key, blob, filename);
-    } // this check needs to be first, otherwise you are never able to send any
-    // non-Blob FormData in node 18!
-    // new File([]) instanceof Blob is always true, so this does not change the current behavior
-    else if (!(value instanceof Blob)) {
-      formData.append(key, JSON.stringify(value));
-    } // if (instanceof File) // <-- you can do this if you do not want to allow sole Blob uploads at all
-    else {
-      formData.append(key, value);
-    }
+    appendToForm(formData, key, value);
   });
 
   return formData;

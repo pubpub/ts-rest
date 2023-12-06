@@ -4,6 +4,24 @@ Small fork of `@ts-rest/core` for use in the [PubPub SDK](https://github.com/pub
 
 Mainly exports a few types and allows forms to be uploaded in Node 18.
 
+## Form upload change
+
+The main change is in `libs/ts-rest/core/src/client.ts`, in the form upload section.
+
+Basically if you submit arrays of things it now works.
+
+```ts
+client.upload({ files: [new File([''], 'test.txt')] });
+```
+
+and it allows you to specify a file like this:
+
+```ts
+client.upload({ files: { blob: new Blob([''], 'text/plain'), filename: 'test.txt' } });
+```
+
+This allows you to upload files using `node` 18, where `File` is not defined.
+
 ## Development
 
 ```sh
