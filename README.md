@@ -4,6 +4,14 @@ Small fork of `@ts-rest/core` for use in the [PubPub SDK](https://github.com/pub
 
 Mainly exports a few types and allows forms to be uploaded in Node 18.
 
+## Semver
+
+We aim to keep in sync with the main repo, only making non-breaking changes ideally.
+
+The versioning is `<main-version><incremental-digit>`.
+
+So if `@ts-rest/core` is at `3.30.5`, we'll be at `3.30.50`, `3.30.51` etc.
+
 ## Form upload change
 
 The main change is in `libs/ts-rest/core/src/client.ts`, in the form upload section.

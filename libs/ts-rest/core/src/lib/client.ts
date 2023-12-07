@@ -152,9 +152,7 @@ const appendToForm = (formData: FormData, key: string, value: unknown) => {
     value.forEach((v) => {
       appendToForm(formData, key, v);
     });
-  }
-
-  if (
+  } else if (
     typeof value === 'object' &&
     value != null &&
     'blob' in value &&
@@ -174,7 +172,7 @@ const appendToForm = (formData: FormData, key: string, value: unknown) => {
   }
   // non-Blob FormData in node 18!
   // new File([]) instanceof Blob is always true, so this does not change the current behavior
-  else if (!(value instanceof Blob)) {
+  else if (!(value instanceof Blob) && typeof value !== 'string') {
     formData.append(key, JSON.stringify(value));
   } // if (instanceof File) // <-- you can do this if you do not want to allow sole Blob uploads at all
   else {
